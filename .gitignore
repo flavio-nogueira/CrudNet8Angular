@@ -1,0 +1,19 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/BlackEnd/.vs
+/BlackEnd/BlackEnd.API/bin/Debug/net8.0
+/BlackEnd/BlackEnd.API/obj
+/BlackEnd/BlackEnd.Application/bin/Debug/net8.0
+/BlackEnd/BlackEnd.Application/obj
+/BlackEnd/BlackEnd.Domain/bin/Debug/net8.0
+/BlackEnd/BlackEnd.Domain/obj
+/BlackEnd/BlackEnd.Infrastructure/bin/Debug/net8.0
+/BlackEnd/BlackEnd.Infrastructure/obj
+/BlackEnd/BlackEnd.Tests/bin/Debug/net8.0
+/BlackEnd/BlackEnd.Tests/obj/Debug/net8.0
+/BlackEnd/BlackEnd.Tests/obj
+/cliente-app/src - Copia
+/cliente-app_
+/cliente-app.rar

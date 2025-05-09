@@ -1,0 +1,24 @@
+<h2>Lista de Clientes</h2>
+<button (click)="navegarParaCadastro()">Cadastrar Cliente</button>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome/Razão Social</th>
+      <th>CPF/CNPJ</th>
+      <th>Email</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cliente of clientes">
+      <td>{{ cliente.nomeRazaoSocial }}</td>
+      <td>{{ cliente.cpfcnpj }}</td>
+      <td>{{ cliente.email }}</td>
+      <td>
+        <button (click)="editarCliente(cliente)">Editar</button>
+        <button (click)="excluirCliente(cliente)">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,88 @@
+<div class="container mt-4">
+  <form [formGroup]="clienteForm" (ngSubmit)="cadastrarCliente()" class="row g-3">
+    
+    <div class="col-md-6">
+      <label for="tipo">Tipo de Pessoa *</label>
+      <select formControlName="Tipo" class="form-control" (change)="atualizarCampos()">
+        <option value="1">Pessoa Física</option>
+        <option value="2">Pessoa Jurídica</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label for="nomeRazaoSocial">Nome/Razão Social *</label>
+      <input formControlName="NomeRazaoSocial" type="text" class="form-control" placeholder="Digite o nome">
+    </div>
+
+    <div class="col-md-6">
+      <label for="cpfCnpj">CPF/CNPJ *</label>
+      <input formControlName="CpfCnpj" type="text" class="form-control" placeholder="123.456.789-00">
+    </div>
+
+    <div class="col-md-6" *ngIf="clienteForm.get('Tipo')?.value == 1">
+      <label for="dataNascimento">Data de Nascimento *</label>
+      <input formControlName="DataNascimento" type="date" class="form-control">
+    </div>
+
+    <div class="col-md-6" *ngIf="clienteForm.get('Tipo')?.value == 2">
+      <label for="inscricaoEstadual">Inscrição Estadual</label>
+      <input formControlName="InscricaoEstadual" type="text" class="form-control" placeholder="123456789">
+    </div>
+
+    <div class="col-md-6" *ngIf="clienteForm.get('Tipo')?.value == 2">
+      <label>
+        <input type="checkbox" formControlName="IsentoIE"> Isento de Inscrição Estadual
+      </label>
+    </div>
+
+    <div class="col-md-6">
+      <label for="email">Email *</label>
+      <input formControlName="Email" type="email" class="form-control" placeholder="seuemail@exemplo.com">
+    </div>
+
+    <div class="col-md-6">
+      <label for="telefone">Telefone *</label>
+      <input formControlName="Telefone" type="text" class="form-control" placeholder="(11) 99999-9999">
+    </div>
+
+    <div class="col-md-4">
+      <label for="cep">CEP</label>
+      <input formControlName="Cep" type="text" class="form-control" placeholder="12345-678">
+    </div>
+
+    <div class="col-md-8">
+      <label for="endereco">Endereço</label>
+      <input formControlName="Endereco" type="text" class="form-control" placeholder="Rua dos Sonhos">
+    </div>
+
+    <div class="col-md-4">
+      <label for="numero">Número</label>
+      <input formControlName="Numero" type="text" class="form-control" placeholder="Ex: 100">
+    </div>
+
+    <div class="col-md-4">
+      <label for="complemento">Complemento</label>
+      <input formControlName="Complemento" type="text" class="form-control" placeholder="Ex: Apto 101">
+    </div>
+
+    <div class="col-md-4">
+      <label for="bairro">Bairro</label>
+      <input formControlName="Bairro" type="text" class="form-control" placeholder="Ex: Centro">
+    </div>
+
+    <div class="col-md-6">
+      <label for="cidade">Cidade</label>
+      <input formControlName="Cidade" type="text" class="form-control" placeholder="São Paulo">
+    </div>
+
+    <div class="col-md-6">
+      <label for="estado">Estado</label>
+      <input formControlName="Estado" type="text" class="form-control" placeholder="SP">
+    </div>
+
+    <div class="col-12 d-flex justify-content-between mt-3">
+      <button type="submit" class="btn btn-primary">Cadastrar</button>
+      <button type="button" class="btn btn-secondary" (click)="limparFormulario()">Limpar</button>
+    </div>
+  </form>
+</div>
