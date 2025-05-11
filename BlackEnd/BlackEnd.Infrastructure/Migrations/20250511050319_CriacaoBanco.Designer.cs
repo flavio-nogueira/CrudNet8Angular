@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlackEnd.Infrastructure.Migrations
 {
     [DbContext(typeof(BlackEndContext))]
-    [Migration("20250511030231_CriacaoBanco")]
+    [Migration("20250511050319_CriacaoBanco")]
     partial class CriacaoBanco
     {
         /// <inheritdoc />

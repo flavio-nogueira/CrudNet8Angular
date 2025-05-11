@@ -12,7 +12,7 @@ namespace BlackEnd.Infrastructure.Context
         {
             modelBuilder.ApplyConfiguration(new Configurations.ClienteMap());
             base.OnModelCreating(modelBuilder);
-
+         
         }
     }
 }

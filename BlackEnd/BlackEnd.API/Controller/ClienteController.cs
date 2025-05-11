@@ -5,6 +5,7 @@ using BlackEnd.Domain.Interfaces;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 namespace BlackEnd.API.Controllers
@@ -163,5 +164,6 @@ namespace BlackEnd.API.Controllers
                 return Problem(detail: ex.Message, statusCode: (int)HttpStatusCode.InternalServerError);
             }
         }
+  
     }
 }
