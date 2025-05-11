@@ -17,11 +17,28 @@ Esta é uma aplicação completa de Cadastro de Clientes, composta por uma API d
 - **Docker e Docker Compose**: Utilizados para garantir uma configuração consistente e fácil de replicar, simplificando o deploy e o gerenciamento do ambiente.
 
 ### SeedClientes (Carga Inicial de Dados)
-- O método SeedClientes permite popular automaticamente o banco de dados com 20 registros de clientes, respeitando as regras de negócio:
+- O método SeedClientes permite popular automaticamente o banco de dados com 40 registros de clientes, respeitando as regras de negócio:
   - Apenas um cadastro por CPF/CNPJ e E-mail.
   - Pessoas Físicas com idade mínima de 18 anos.
   - Pessoas Jurídicas com Inscrição Estadual ou Isenção de IE.
   - Esse método é útil para testes e desenvolvimento, garantindo um conjunto inicial de dados.
+
+### Como Executar o SeedClientes com Docker Compose
+1. Certifique-se de que o Docker e o Docker Compose estão instalados.
+2. Navegue até a pasta do projeto:
+```bash
+cd D:\Desenvolvimento\CrudNet8Angular\BlackEnd
+```
+3. Execute o comando para subir o ambiente:
+```bash
+docker-compose up -d
+```
+4. Para rodar o SeedClientes diretamente, utilize:
+```bash
+docker-compose exec blackend-api dotnet run --seed SeedClientes
+```
+- Isso gerará automaticamente 40 clientes (Pessoas Físicas e Jurídicas) no banco de dados.
+- Caso o banco já contenha clientes, o Seed não duplicará registros.
 
 ### Front-End
 - **Angular**: Escolhido por sua robustez, modularidade e grande suporte da comunidade. Permite criar aplicações escaláveis e de fácil manutenção.
@@ -32,7 +49,7 @@ Esta é uma aplicação completa de Cadastro de Clientes, composta por uma API d
 
 ---
 
-## ✅ <span style="color:blue">Estrutura do Projeto</span>
+## ✅ Estrutura do Projeto
 ```
 /BlackEnd
 ├── /BlackEnd.API         # API com Controllers
@@ -49,3 +66,19 @@ Esta é uma aplicação completa de Cadastro de Clientes, composta por uma API d
 ├── /src/app/models        # Modelos de Dados (DTOs)
 └── /src/assets            # Recursos estáticos
 ```
+
+---
+
+## ✅ Demonstração Visual
+
+### ✅ Tela de Listagem de Clientes
+- Exibe todos os clientes cadastrados com opção de editar e excluir.
+- Permite pesquisar clientes por nome ou CPF/CNPJ.
+
+### ✅ Tela de Cadastro de Cliente
+- Permite cadastrar um novo cliente (Pessoa Física ou Jurídica).
+- Validações em tempo real com Reactive Forms.
+
+### ✅ Tela de Edição de Cliente
+- Permite editar os dados de um cliente já cadastrado.
+- Validações automáticas garantem a integridade dos dados.
