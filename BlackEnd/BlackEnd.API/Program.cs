@@ -1,9 +1,9 @@
+using BlackEnd.Application.Validators;
 using BlackEnd.Infrastructure.Extensions;
 using BlackEnd.Infrastructure.IoC;
 using BlackEnd.Infrastructure.Mappings;
-using MediatR;
 using FluentValidation.AspNetCore;
-using BlackEnd.Application.Validators;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,7 +42,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlackEnd API v1");
-        c.RoutePrefix = string.Empty; 
+        c.RoutePrefix = string.Empty;
     });
 }
 app.UseCors("AllowAllOrigins");

@@ -1,24 +1,48 @@
-<h2>Lista de Clientes</h2>
-<button (click)="navegarParaCadastro()">Cadastrar Cliente</button>
+<div class="container-list mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="title">Lista de Clientes</h2>
+    <button class="btn btn-primary" (click)="navegarParaCadastro()">Cadastrar Cliente</button>
+  </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Nome/Razão Social</th>
-      <th>CPF/CNPJ</th>
-      <th>Email</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let cliente of clientes">
-      <td>{{ cliente.nomeRazaoSocial }}</td>
-      <td>{{ cliente.cpfcnpj }}</td>
-      <td>{{ cliente.email }}</td>
-      <td>
-        <button (click)="editarCliente(cliente)">Editar</button>
-        <button (click)="excluirCliente(cliente)">Excluir</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <table class="client-table w-100">
+    <thead>
+      <tr>
+        <th>Nome/Razão Social</th>
+        <th>CPF/CNPJ</th>
+        <th>Tipo</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th class="col-endereco">Endereço</th>
+        <th class="col-acoes">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientesPaginados()">
+        <td>{{ cliente.nomeRazaoSocial }}</td>
+        <td>{{ cliente.cpfCnpj }}</td>
+        <td>{{ cliente.tipo == '1' ? 'Pessoa Física' : 'Pessoa Jurídica' }}</td>
+        <td>{{ cliente.email }}</td>
+        <td>{{ cliente.telefone }}</td>
+        <td>
+          {{ cliente.endereco }}, Nº {{ cliente.numero }}, {{ cliente.bairro }}, {{ cliente.cidade }} - {{ cliente.estado }}
+        </td>
+        <td class="actions text-center">
+          <button class="btn btn-warning btn-sm me-2" (click)="editarCliente(cliente)" title="Editar">
+            ✏️
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="excluirCliente(cliente)" title="Excluir">
+            🗑️
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination-controls mt-3 d-flex justify-content-between align-items-center">
+    <span>Página {{ paginaAtual }} de {{ totalPaginas() }}</span>
+    <div class="d-flex gap-2">
+      <button (click)="paginaAnterior()" [disabled]="paginaAtual === 1" class="btn btn-secondary btn-sm">◀️ Anterior</button>
+      <button (click)="proximaPagina()" [disabled]="paginaAtual === totalPaginas()" class="btn btn-secondary btn-sm">Próxima ▶️</button>
+    </div>
+  </div>
+</div>

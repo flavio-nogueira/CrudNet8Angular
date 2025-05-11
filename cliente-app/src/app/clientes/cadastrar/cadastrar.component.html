@@ -1,88 +1,104 @@
 <div class="container mt-4">
-  <form [formGroup]="clienteForm" (ngSubmit)="cadastrarCliente()" class="row g-3">
-    
+  <form [formGroup]="clienteForm" (ngSubmit)="cadastrarCliente()" class="row g-3 shadow p-4 rounded bg-light">
+    <h3 class="mb-4">{{ clienteEditando ? 'Editando Cliente' : 'Cadastro de Cliente' }}</h3>
+
     <div class="col-md-6">
-      <label for="tipo">Tipo de Pessoa *</label>
-      <select formControlName="Tipo" class="form-control" (change)="atualizarCampos()">
+      <label for="nomeRazaoSocial" class="form-label">Nome/Razão Social *</label>
+      <input formControlName="NomeRazaoSocial" type="text" class="form-control" placeholder="Digite o nome">
+      <div *ngIf="clienteForm.get('NomeRazaoSocial')?.invalid && clienteForm.get('NomeRazaoSocial')?.touched" class="text-danger mt-1">
+        Nome/Razão Social é obrigatório e deve ter pelo menos 3 caracteres.
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="cpfCnpj" class="form-label">CPF/CNPJ *</label>
+      <input formControlName="CpfCnpj" type="text" class="form-control" placeholder="123.456.789-00 ou 12.345.678/0001-00">
+      <div *ngIf="clienteForm.get('CpfCnpj')?.invalid && clienteForm.get('CpfCnpj')?.touched" class="text-danger mt-1">
+        CPF/CNPJ é obrigatório e deve estar no formato correto.
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="tipo" class="form-label">Tipo de Pessoa *</label>
+      <select formControlName="Tipo" class="form-select" (change)="atualizarTipoPessoa()">
         <option value="1">Pessoa Física</option>
         <option value="2">Pessoa Jurídica</option>
       </select>
     </div>
 
-    <div class="col-md-6">
-      <label for="nomeRazaoSocial">Nome/Razão Social *</label>
-      <input formControlName="NomeRazaoSocial" type="text" class="form-control" placeholder="Digite o nome">
-    </div>
-
-    <div class="col-md-6">
-      <label for="cpfCnpj">CPF/CNPJ *</label>
-      <input formControlName="CpfCnpj" type="text" class="form-control" placeholder="123.456.789-00">
-    </div>
-
-    <div class="col-md-6" *ngIf="clienteForm.get('Tipo')?.value == 1">
-      <label for="dataNascimento">Data de Nascimento *</label>
+    <div class="col-md-6" *ngIf="clienteForm.get('Tipo')?.value == '1'">
+      <label for="dataNascimento" class="form-label">Data de Nascimento *</label>
       <input formControlName="DataNascimento" type="date" class="form-control">
+      <div *ngIf="clienteForm.get('DataNascimento')?.invalid && clienteForm.get('DataNascimento')?.touched" class="text-danger mt-1">
+        Data de Nascimento é obrigatória.
+      </div>
     </div>
 
-    <div class="col-md-6" *ngIf="clienteForm.get('Tipo')?.value == 2">
-      <label for="inscricaoEstadual">Inscrição Estadual</label>
-      <input formControlName="InscricaoEstadual" type="text" class="form-control" placeholder="123456789">
-    </div>
-
-    <div class="col-md-6" *ngIf="clienteForm.get('Tipo')?.value == 2">
-      <label>
-        <input type="checkbox" formControlName="IsentoIE"> Isento de Inscrição Estadual
-      </label>
+    <div class="col-md-6" *ngIf="clienteForm.get('Tipo')?.value == '2'">
+      <label for="inscricaoEstadual" class="form-label">Inscrição Estadual *</label>
+      <input formControlName="InscricaoEstadual" type="text" class="form-control" placeholder="123456789" 
+             [disabled]="clienteForm.get('IsentoIE')?.value">
+      <div *ngIf="clienteForm.get('InscricaoEstadual')?.invalid && !clienteForm.get('IsentoIE')?.value && clienteForm.get('InscricaoEstadual')?.touched" class="text-danger mt-1">
+        Inscrição Estadual é obrigatória ou marque "Isento de IE".
+      </div>
+      <div class="form-check mt-2">
+        <input type="checkbox" formControlName="IsentoIE" class="form-check-input" (change)="atualizarTipoPessoa()">
+        <label class="form-check-label">Isento de Inscrição Estadual</label>
+      </div>
     </div>
 
     <div class="col-md-6">
-      <label for="email">Email *</label>
+      <label for="email" class="form-label">Email *</label>
       <input formControlName="Email" type="email" class="form-control" placeholder="seuemail@exemplo.com">
+      <div *ngIf="clienteForm.get('Email')?.invalid && clienteForm.get('Email')?.touched" class="text-danger mt-1">
+        E-mail é obrigatório e deve ser válido.
+      </div>
     </div>
 
     <div class="col-md-6">
-      <label for="telefone">Telefone *</label>
+      <label for="telefone" class="form-label">Telefone</label>
       <input formControlName="Telefone" type="text" class="form-control" placeholder="(11) 99999-9999">
     </div>
 
     <div class="col-md-4">
-      <label for="cep">CEP</label>
+      <label for="cep" class="form-label">CEP</label>
       <input formControlName="Cep" type="text" class="form-control" placeholder="12345-678">
     </div>
 
     <div class="col-md-8">
-      <label for="endereco">Endereço</label>
+      <label for="endereco" class="form-label">Endereço</label>
       <input formControlName="Endereco" type="text" class="form-control" placeholder="Rua dos Sonhos">
     </div>
 
     <div class="col-md-4">
-      <label for="numero">Número</label>
+      <label for="numero" class="form-label">Número</label>
       <input formControlName="Numero" type="text" class="form-control" placeholder="Ex: 100">
     </div>
 
     <div class="col-md-4">
-      <label for="complemento">Complemento</label>
-      <input formControlName="Complemento" type="text" class="form-control" placeholder="Ex: Apto 101">
-    </div>
-
-    <div class="col-md-4">
-      <label for="bairro">Bairro</label>
+      <label for="bairro" class="form-label">Bairro</label>
       <input formControlName="Bairro" type="text" class="form-control" placeholder="Ex: Centro">
     </div>
 
+    <div class="col-md-4">
+      <label for="complemento" class="form-label">Complemento</label>
+      <input formControlName="Complemento" type="text" class="form-control" placeholder="Ex: Apto 101">
+    </div>
+
     <div class="col-md-6">
-      <label for="cidade">Cidade</label>
+      <label for="cidade" class="form-label">Cidade</label>
       <input formControlName="Cidade" type="text" class="form-control" placeholder="São Paulo">
     </div>
 
     <div class="col-md-6">
-      <label for="estado">Estado</label>
-      <input formControlName="Estado" type="text" class="form-control" placeholder="SP">
+      <label for="estado" class="form-label">Estado</label>
+      <input formControlName="Estado" type="text" class="form-control" placeholder="SP" maxlength="2">
     </div>
 
-    <div class="col-12 d-flex justify-content-between mt-3">
-      <button type="submit" class="btn btn-primary">Cadastrar</button>
-      <button type="button" class="btn btn-secondary" (click)="limparFormulario()">Limpar</button>
+    <div class="col-12 mt-4 d-flex justify-content-end gap-2">
+      <button type="submit" class="btn btn-primary px-4">Cadastrar</button>
+      <button type="button" class="btn btn-secondary px-4" (click)="limparFormulario()">Limpar</button>
+      <button type="button" class="btn btn-danger px-4" (click)="voltartelalistagem()">Voltar</button>
     </div>
   </form>
 </div>

@@ -1,0 +1,31 @@
+.title-primary {
+  color: #00ff4c; 
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.content-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1400px;
+}
+
+.inner-container {
+  max-width: 1400px;
+  width: 100%;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}

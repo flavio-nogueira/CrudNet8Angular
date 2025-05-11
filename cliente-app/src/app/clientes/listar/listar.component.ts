@@ -12,7 +12,10 @@ import { Router } from '@angular/router';
 })
 export class ListarComponent {
   clientes: any[] = [];
-  apiUrl = 'https://localhost:5001/api/Cliente'; // Verifique a URL da sua API
+  clientesFiltrados: any[] = [];
+  paginaAtual = 1;
+  itensPorPagina = 10;
+  apiUrl = 'https://localhost:5001/api/Cliente';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -20,12 +23,11 @@ export class ListarComponent {
     this.listarClientes();
   }
 
- listarClientes() {
-    console.log('Chamando API:', this.apiUrl);
+  listarClientes() {
     this.http.get<any[]>(this.apiUrl).subscribe({
       next: (response) => {
-        console.log('Clientes carregados:', response);
         this.clientes = response;
+        this.clientesFiltrados = [...this.clientes];
       },
       error: (error) => {
         console.error('Erro ao listar clientes:', error);
@@ -33,17 +35,49 @@ export class ListarComponent {
     });
   }
 
-    navegarParaCadastro() {
+  clientesPaginados() {
+    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+    const fim = inicio + this.itensPorPagina;
+    return this.clientesFiltrados.slice(inicio, fim);
+  }
+
+  paginaAnterior() {
+    if (this.paginaAtual > 1) {
+      this.paginaAtual--;
+    }
+  }
+
+  proximaPagina() {
+    if (this.paginaAtual < this.totalPaginas()) {
+      this.paginaAtual++;
+    }
+  }
+
+  totalPaginas() {
+    return Math.ceil(this.clientesFiltrados.length / this.itensPorPagina);
+  }
+
+  navegarParaCadastro() {
     this.router.navigate(['/clientes/cadastrar']);
   }
 
-  editarCliente(cliente: any) {
-    console.log('Editar:', cliente);
-    // Implementar lógica de edição
-  }
+editarCliente(cliente: any) {
+  this.router.navigate(['/clientes/cadastrar'], { queryParams: { id: cliente.id } });
+}
+
+
 
   excluirCliente(cliente: any) {
-    console.log('Excluir:', cliente);
-    // Implementar lógica de exclusão
+    if (confirm(`Deseja realmente excluir o cliente ${cliente.nomeRazaoSocial}?`)) {
+      this.http.delete(`${this.apiUrl}/${cliente.id}`).subscribe({
+        next: () => {
+          alert('Cliente excluído com sucesso.');
+          this.listarClientes();
+        },
+        error: (error) => {
+          console.error('Erro ao excluir cliente:', error);
+        }
+      });
+    }
   }
 }

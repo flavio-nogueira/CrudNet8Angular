@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using BlackEnd.Application.Commands;
 using BlackEnd.Application.DTOs;
-using BlackEnd.Domain.Entities;
 using BlackEnd.Domain.Interfaces;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 using System.Net;
 
 namespace BlackEnd.API.Controllers
@@ -35,7 +33,7 @@ namespace BlackEnd.API.Controllers
             _createValidator = createValidator;
             _updateValidator = updateValidator;
         }
-    
+
         [HttpPost]
         [ProducesResponseType(typeof(Guid), (int)HttpStatusCode.Created)]
         [ProducesResponseType(typeof(ProblemDetails), (int)HttpStatusCode.BadRequest)]
