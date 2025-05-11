@@ -71,14 +71,38 @@ docker-compose exec blackend-api dotnet run --seed SeedClientes
 
 ## ✅ Demonstração Visual
 
+### ✅ Swagger da Api
+
+![image](https://github.com/user-attachments/assets/2f8aa977-aa95-46cd-b8f9-f46de9d06942)
+
+
 ### ✅ Tela de Listagem de Clientes
 - Exibe todos os clientes cadastrados com opção de editar e excluir.
-- Permite pesquisar clientes por nome ou CPF/CNPJ.
+
+![image](https://github.com/user-attachments/assets/f2b8d82b-fd9d-4a31-9b52-c48b459ea445)
+
 
 ### ✅ Tela de Cadastro de Cliente
 - Permite cadastrar um novo cliente (Pessoa Física ou Jurídica).
 - Validações em tempo real com Reactive Forms.
 
+![image](https://github.com/user-attachments/assets/5a7ef36b-0de1-40db-8cfa-8692d73c550d)
+
+
 ### ✅ Tela de Edição de Cliente
 - Permite editar os dados de um cliente já cadastrado.
 - Validações automáticas garantem a integridade dos dados.
+
+![image](https://github.com/user-attachments/assets/83d1e78f-8d96-40c3-be33-bf00f6e7b14c)
+
+
+- ### ✅ Tela de MySql
+- Dados Gerados pelo Seed
+- 
+![image](https://github.com/user-attachments/assets/0f49240c-8982-4ca7-991d-25857050106d)
+
+
+### ✅ Test Explore
+- Aplicação dos teste Unitário
+![image](https://github.com/user-attachments/assets/d487a2a3-e865-4639-8d05-878a1f95dd72)
+
